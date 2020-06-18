@@ -14,7 +14,3 @@ $ pass get mysql  #get mysql password
 $ pass set mysql mysqlpass #reset mysql password
 $ pass del mysql  #delete mysql password
 ```
-
-# Extend(TODO)
-
-set the password to mysql or redis or mongodb, etc. Not only generate and save to file.
