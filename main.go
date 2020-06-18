@@ -27,16 +27,19 @@ func main() {
 		c.key = os.Args[2]
 		c.pass = os.Args[3]
 	default:
+		showHelp()
 		return
 	}
 
 	if err := initFile(); err != nil {
 		fmt.Fprintf(os.Stdout, "%v\n", err)
+		showHelp()
 		return
 	}
 
 	if err := c.execCommand(); err != nil {
 		fmt.Fprintf(os.Stdout, "%v\n", err)
+		showHelp()
 		return
 	}
 }
