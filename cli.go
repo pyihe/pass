@@ -47,7 +47,7 @@ func (cli *Cli) execCommand() error {
 
 func (cli *Cli) genPass() error {
 	if cli.key == "" {
-		return errors.New("key cannot be empty")
+		return errors.New("invalid key")
 	}
 	section := cli.file.Section("pass")
 	key, _ := section.GetKey(cli.key)
@@ -120,7 +120,7 @@ func (cli *Cli) getPass() error {
 func (cli *Cli) delPass() error {
 	section := cli.file.Section("pass")
 	if cli.key == "" {
-		return errors.New("key must not be empty when del")
+		return errors.New("invalid key")
 	}
 	key, _ := section.GetKey(cli.key)
 	if key == nil {
@@ -141,6 +141,10 @@ func (cli *Cli) delPass() error {
 
 func (cli *Cli) setPass() error {
 	var err error
+	if cli.key == "" {
+		err = errors.New("invalid key")
+		return err
+	}
 	if len(cli.pass) > 0 && len(cli.pass) < 6 {
 		err = errors.New("pass length must more than 6")
 		return err
