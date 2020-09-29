@@ -6,7 +6,7 @@ const (
 	commandDel = "del" //删除
 	commandSet = "set" //刷新
 
-	help = `	
+	helpText = `	
 
 	command:
 		gen	generate one new password for specified key,

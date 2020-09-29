@@ -1,45 +1,32 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
-	"strings"
 )
 
 func main() {
-	switch len(os.Args) {
-	case 1:
+	flags := flag.NewFlagSet("pass", flag.ExitOnError)
+	flags.Usage = func() {
 		showHelp()
-		return
-	case 2:
-		h := os.Args[1]
-		h = strings.ToLower(h)
-		if h == "-h" || h == "-help" {
-			showHelp()
-			return
-		}
-		c.command = os.Args[1]
-	case 3:
-		c.command = os.Args[1]
-		c.key = os.Args[2]
-	case 4:
-		c.command = os.Args[1]
-		c.key = os.Args[2]
-		c.pass = os.Args[3]
-	default:
-		showHelp()
+	}
+
+	flags.StringVar(&c.command, "c", "", "executable tag")
+	flags.StringVar(&c.key, "k", "", "key")
+	flags.StringVar(&c.pass, "p", "", "pass")
+	if err := flags.Parse(os.Args[1:]); err != nil {
+		fmt.Fprintf(os.Stderr, "%v\n", err)
 		return
 	}
 
 	if err := initFile(); err != nil {
-		fmt.Fprintf(os.Stdout, "%v\n", err)
-		showHelp()
+		fmt.Fprintf(os.Stderr, "%v\n", err)
 		return
 	}
 
 	if err := c.execCommand(); err != nil {
-		fmt.Fprintf(os.Stdout, "%v\n", err)
-		showHelp()
+		fmt.Fprintf(os.Stderr, "%v\n", err)
 		return
 	}
 }

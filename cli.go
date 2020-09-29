@@ -23,7 +23,7 @@ type Cli struct {
 }
 
 var (
-	c = &Cli{}
+	c = Cli{}
 )
 
 //判断指令
@@ -271,6 +271,5 @@ func initFile() error {
 }
 
 func showHelp() {
-	help := fmt.Sprintf(help)
-	fmt.Fprintf(os.Stdout, help)
+	fmt.Fprintf(os.Stderr, helpText)
 }
