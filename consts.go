@@ -9,23 +9,23 @@ const (
 	helpText = `	
 
 	command:
-		gen	generate one new password for specified key,
-			the key must not be empty. you can choose to 
-			reset the password if the key already exist.
+		-c command to be executed
+			gen	generate one new password for specified key,
+				the key must not be empty. you can choose to 
+				reset the password if the key already exist.
+	
+			get	get password of the specified key, all passwords
+				will be list if key is empty.
+	
+			del	delete password of specified key, key must not
+				be empty.
+	
+			set	reset the password of the specified key with your 
+				own password. it will generate new password if 
+				the given password is empty.
+		-k the target key for password.
 
-		get	get password of the specified key, all passwords
-			will be list if key is empty.
-
-		del	delete password of specified key, key must not
-			be empty.
-
-		set	reset the password of the specified key with your 
-			own password. it will generate new password if 
-			the given password is empty.
-
-	key:		the key for password.
-
-	pass:		the password you want to reset to the key.
+		-p the password you want to reset to the key.
 
 
 `

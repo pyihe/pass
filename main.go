@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"os"
 )
 
@@ -15,20 +14,18 @@ func main() {
 	flags.StringVar(&c.command, "c", "", "executable tag")
 	flags.StringVar(&c.key, "k", "", "key")
 	flags.StringVar(&c.pass, "p", "", "pass")
-	if err := flags.Parse(os.Args[1:]); err != nil {
-		fmt.Fprintf(os.Stderr, "%v\n", err)
+	var err error
+	if err = flags.Parse(os.Args[1:]); err != nil {
 		flags.Usage()
 		return
 	}
 
-	if err := initFile(); err != nil {
-		fmt.Fprintf(os.Stderr, "%v\n", err)
+	if err = initFile(); err != nil {
 		flags.Usage()
 		return
 	}
 
-	if err := c.execCommand(); err != nil {
-		fmt.Fprintf(os.Stderr, "%v\n", err)
+	if err = c.execCommand(); err != nil {
 		flags.Usage()
 		return
 	}
